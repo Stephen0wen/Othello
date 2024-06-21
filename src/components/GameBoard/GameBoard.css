@@ -1,0 +1,28 @@
+#game-board {
+    display: flex;
+    flex-direction: row;
+    width: min-content;
+    background-color: darkgreen;
+    border: 0.2rem solid black;
+    border-radius: 7px;
+    padding: 0.1rem;
+    margin-top: 3rem;
+}
+
+#game-board .game-board-column {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#game-board .game-board-cell {
+    background-color: green;
+    border: 0.1rem solid darkgreen;
+    border-radius: 5px;
+
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+#game-board .game-board-cell p {
+    text-align: center;
+}
