@@ -1,0 +1,14 @@
+.game-piece {
+    height: min(9vh, 9vw);
+    width: min(9vh, 9vw);
+    border-radius: 50%;
+    box-shadow: max(-0.1vh, -0.1vw) min(0.1vh, 0.1vw) min(0.5vh, 0.5vw) #000;
+}
+
+.game-piece-white {
+    background: radial-gradient(#fff 0%, #ddd 80%);
+}
+
+.game-piece-black {
+    background: radial-gradient(#222 0%, #000 80%);
+}

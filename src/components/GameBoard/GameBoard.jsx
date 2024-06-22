@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
 import "./GameBoard.css";
+import GamePiece from "../GamePiece/GamePiece";
 
 export default function GameBoard() {
     const [gameState, setGameState] = useState([[{}]]);
 
     useEffect(() => {
-        const emptyGrid = Array(8)
+        const startPostition = Array(8)
             .fill()
             .map(() => {
                 return Array(8)
                     .fill()
                     .map(() => {
-                        return { value: null };
+                        return null;
                     });
             });
+        startPostition[3][4] = { value: false };
+        startPostition[3][3] = { value: true };
+        startPostition[4][4] = { value: true };
+        startPostition[4][3] = { value: false };
 
-        setGameState(emptyGrid);
+        setGameState(startPostition);
     }, []);
-
-    console.log(gameState);
 
     return (
         <div id="game-board">
             {gameState.map((column, xCoordinate) => {
                 return (
-                    <div className="game-board-column">
-                        {column.map((cell, yCoordinate) => {
+                    <div key={xCoordinate} className="game-board-column">
+                        {column.map((piece, yCoordinate) => {
                             return (
-                                <div className="game-board-cell">
-                                    <p>{`(${xCoordinate}, ${yCoordinate})`}</p>
+                                <div
+                                    key={`${xCoordinate}-${yCoordinate}`}
+                                    className="game-board-cell"
+                                >
+                                    <GamePiece piece={piece} />
                                 </div>
                             );
                         })}
