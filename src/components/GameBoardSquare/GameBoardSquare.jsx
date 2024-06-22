@@ -12,16 +12,12 @@ export default function GameBoardSquare({
     const possibleMoves = usePossibleMoves();
     const placePiece = usePlacePiece();
     const [className, setClassName] = useState("");
-    const { gameState, setGameState, isWhiteTurn, setIsWhiteTurn } =
-        useContext(GameContext);
 
-    const isPlayable = Object.keys(possibleMoves).includes(
-        `${xCoordinate}${yCoordinate}`
-    );
+    const positionLabel = `${xCoordinate}${yCoordinate}`;
+    const isPlayable = Object.keys(possibleMoves).includes(positionLabel);
 
     useEffect(() => {
         const newClassName = isPlayable ? " playable" : "";
-
         setClassName(newClassName);
     }, [possibleMoves]);
 
