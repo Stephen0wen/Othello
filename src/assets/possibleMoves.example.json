@@ -1,0 +1,22 @@
+{
+    "23": {
+        "xCoordinate": 2,
+        "yCoordinate": 3,
+        "outFlankedPieces": [{ "xCoordinate": 3, "yCoordinate": 3 }]
+    },
+    "32": {
+        "xCoordinate": 3,
+        "yCoordinate": 2,
+        "outFlankedPieces": [{ "xCoordinate": 3, "yCoordinate": 3 }]
+    },
+    "45": {
+        "xCoordinate": 4,
+        "yCoordinate": 5,
+        "outFlankedPieces": [{ "xCoordinate": 4, "yCoordinate": 4 }]
+    },
+    "54": {
+        "xCoordinate": 5,
+        "yCoordinate": 4,
+        "outFlankedPieces": [{ "xCoordinate": 4, "yCoordinate": 4 }]
+    }
+}

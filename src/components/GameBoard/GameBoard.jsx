@@ -1,10 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./GameBoard.css";
 import GamePiece from "../GamePiece/GamePiece";
 import { GameContext } from "../../contexts/GameContext";
+import usePossibleMoves from "../../hooks/usePossibleMoves";
+import GameBoardSquare from "../GameBoardSquare/GameBoardSquare";
 
 export default function GameBoard() {
-    const { gameState } = useContext(GameContext);
+    const { gameState, isWhiteTurn } = useContext(GameContext);
+    const { possibleMoves } = usePossibleMoves();
 
     return (
         <div id="game-board">
@@ -13,12 +16,13 @@ export default function GameBoard() {
                     <div key={xCoordinate} className="game-board-column">
                         {column.map((piece, yCoordinate) => {
                             return (
-                                <div
-                                    key={`${xCoordinate}-${yCoordinate}`}
-                                    className="game-board-cell"
+                                <GameBoardSquare
+                                    key={`${xCoordinate}${yCoordinate}`}
+                                    xCoordinate={xCoordinate}
+                                    yCoordinate={yCoordinate}
                                 >
                                     <GamePiece piece={piece} />
-                                </div>
+                                </GameBoardSquare>
                             );
                         })}
                     </div>
