@@ -13,6 +13,5 @@
 }
 
 #game-board .playable {
-    background-color: yellowgreen;
-    opacity: 0.5;
+    background-color: #9acd32aa;
 }
