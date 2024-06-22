@@ -1,27 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./GameBoard.css";
 import GamePiece from "../GamePiece/GamePiece";
+import { GameContext } from "../../contexts/GameContext";
 
 export default function GameBoard() {
-    const [gameState, setGameState] = useState([[{}]]);
-
-    useEffect(() => {
-        const startPostition = Array(8)
-            .fill()
-            .map(() => {
-                return Array(8)
-                    .fill()
-                    .map(() => {
-                        return null;
-                    });
-            });
-        startPostition[3][4] = { value: false };
-        startPostition[3][3] = { value: true };
-        startPostition[4][4] = { value: true };
-        startPostition[4][3] = { value: false };
-
-        setGameState(startPostition);
-    }, []);
+    const { gameState } = useContext(GameContext);
 
     return (
         <div id="game-board">
