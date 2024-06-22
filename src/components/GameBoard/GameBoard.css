@@ -3,9 +3,9 @@
     flex-direction: row;
     width: min-content;
     background-color: darkgreen;
-    border: 0.2rem solid black;
-    border-radius: 7px;
-    padding: 0.1rem;
+    border: min(0.2vh, 0.2vw) solid black;
+    border-radius: min(1.2vh, 1.2vw);
+    padding: min(0.2vh, 0.2vw);
     margin-top: 3rem;
 }
 
@@ -15,14 +15,19 @@
 }
 
 #game-board .game-board-cell {
-    background-color: green;
-    border: 0.1rem solid darkgreen;
-    border-radius: 5px;
+    height: min(10vh, 10vw);
+    width: min(10vh, 10vw);
 
-    height: 3.5rem;
-    width: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: green;
+    border: min(0.2vh, 0.2vw) solid darkgreen;
+    border-radius: min(1vh, 1vw);
 }
 
 #game-board .game-board-cell p {
     text-align: center;
+    font-size: min(3.5vh, 3.5vw);
 }
