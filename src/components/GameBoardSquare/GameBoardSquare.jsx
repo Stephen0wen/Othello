@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import "./GameBoardSquare.css";
 import usePossibleMoves from "../../hooks/usePossibleMoves";
-import { GameContext } from "../../contexts/GameContext";
 import usePlacePiece from "../../hooks/usePlacePiece";
 
 export default function GameBoardSquare({

@@ -6,8 +6,7 @@ import usePossibleMoves from "../../hooks/usePossibleMoves";
 import GameBoardSquare from "../GameBoardSquare/GameBoardSquare";
 
 export default function GameBoard() {
-    const { gameState, isWhiteTurn } = useContext(GameContext);
-    const { possibleMoves } = usePossibleMoves();
+    const { gameState } = useContext(GameContext);
 
     return (
         <div id="game-board">
