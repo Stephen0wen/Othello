@@ -1,6 +1,6 @@
 .game-piece {
-    height: min(9vh, 9vw);
-    width: min(9vh, 9vw);
+    height: calc(var(--game-square-size) * 0.9);
+    width: calc(var(--game-square-size) * 0.9);
     border-radius: 50%;
     box-shadow: max(-0.1vh, -0.1vw) min(0.1vh, 0.1vw) min(0.5vh, 0.5vw) #000;
 }

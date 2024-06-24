@@ -4,9 +4,30 @@ import { GameContext } from "../contexts/GameContext";
 
 export default function usePossibleMoves() {
     const [possibleMoves, setPossibleMoves] = useState(example);
-    const { gameState, isWhiteTurn } = useContext(GameContext);
+    const { gameState, isWhiteTurn, setIsWhiteTurn, setIsGameOver } =
+        useContext(GameContext);
+
+    let checkingColor;
 
     useEffect(() => {
+        checkingColor = isWhiteTurn;
+        let newPossibleMoves;
+        newPossibleMoves = checkPossibleMoves();
+        if (Object.keys(newPossibleMoves).length) {
+            setPossibleMoves(newPossibleMoves);
+        } else {
+            checkingColor = !isWhiteTurn;
+            newPossibleMoves = checkPossibleMoves();
+            setPossibleMoves(newPossibleMoves);
+            if (Object.keys(newPossibleMoves).length) {
+                setIsWhiteTurn(!isWhiteTurn);
+            } else {
+                setIsGameOver(true);
+            }
+        }
+    }, [isWhiteTurn]);
+
+    const checkPossibleMoves = () => {
         const newPossibleMoves = {};
         gameState.forEach((column, xCoordinate) => {
             column.forEach((square, yCoordinate) => {
@@ -26,8 +47,8 @@ export default function usePossibleMoves() {
                 }
             });
         });
-        setPossibleMoves(newPossibleMoves);
-    }, [gameState]);
+        return newPossibleMoves;
+    };
 
     const getOutFlankedPieces = (xCoordinate, yCoordinate) => {
         const outFlanked = [];
@@ -75,7 +96,7 @@ export default function usePossibleMoves() {
             if (!currentValue) {
                 return [];
             }
-            if (currentValue.value !== isWhiteTurn) {
+            if (currentValue.value !== checkingColor) {
                 outFlanked.push({
                     xCoordinate: currentX,
                     yCoordinate: currentY,
@@ -83,7 +104,7 @@ export default function usePossibleMoves() {
                 const { nextX, nextY } = directionFunc(currentX, currentY);
                 return checkNextPosition(nextX, nextY);
             }
-            if (currentValue.value === isWhiteTurn) {
+            if (currentValue.value === checkingColor) {
                 return outFlanked;
             }
         };

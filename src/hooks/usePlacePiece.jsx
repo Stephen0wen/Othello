@@ -9,17 +9,19 @@ export default function usePlacePiece() {
 
     const placePiece = (xCoordinate, yCoordinate) => {
         const positionLabel = `${xCoordinate}${yCoordinate}`;
-        const { outFlankedPieces } = possibleMoves[positionLabel];
+        if (possibleMoves[positionLabel]) {
+            const { outFlankedPieces } = possibleMoves[positionLabel];
 
-        const newGameState = structuredClone(gameState);
-        newGameState[xCoordinate][yCoordinate] = { value: isWhiteTurn };
-
-        outFlankedPieces.forEach(({ xCoordinate, yCoordinate }) => {
+            const newGameState = structuredClone(gameState);
             newGameState[xCoordinate][yCoordinate] = { value: isWhiteTurn };
-        });
 
-        setGameState(newGameState);
-        setIsWhiteTurn(!isWhiteTurn);
+            outFlankedPieces.forEach(({ xCoordinate, yCoordinate }) => {
+                newGameState[xCoordinate][yCoordinate] = { value: isWhiteTurn };
+            });
+
+            setGameState(newGameState);
+            setIsWhiteTurn(!isWhiteTurn);
+        }
     };
 
     return placePiece;

@@ -3,10 +3,13 @@
     flex-direction: row;
     width: min-content;
     background-color: darkgreen;
-    border: min(0.2vh, 0.2vw) solid black;
-    border-radius: min(1.2vh, 1.2vw);
-    padding: min(0.2vh, 0.2vw);
-    margin-top: 3rem;
+    border: var(--game-square-border-size) solid black;
+    border-radius: calc(
+        var(--game-square-radius-size) + var(--game-square-border-size)
+    );
+    padding: var(--game-square-border-size);
+
+    box-shadow: max(-0.5vh, -0.5vw) min(0.5vh, 0.5vw) min(2vh, 2vw) #000c;
 }
 
 #game-board .game-board-column {

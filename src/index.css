@@ -2,10 +2,15 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-    font-size: clamp(8px, 2vh, 16px);
+    font-size: min(2vw, 2vh, 20px);
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
+
+    --game-board-size: min(90vw, 60vh, 1500px);
+    --game-square-size: calc(var(--game-board-size) / 8);
+    --game-square-border-size: calc(var(--game-square-size) / 50);
+    --game-square-radius-size: calc(var(--game-square-border-size) * 5);
 }
 
 body {
