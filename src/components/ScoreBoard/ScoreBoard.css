@@ -1,8 +1,8 @@
 #score-board {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    width: calc(var(--game-square-size) * 5);
+    justify-content: space-between;
+    width: calc(var(--game-square-size) * 4.5);
     margin: 2rem;
     padding: 1rem;
     border-radius: 1rem;

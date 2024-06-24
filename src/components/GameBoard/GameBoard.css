@@ -9,6 +9,8 @@
     );
     padding: var(--game-square-border-size);
     margin-top: 3rem;
+
+    box-shadow: max(-0.5vh, -0.5vw) min(0.5vh, 0.5vw) min(2vh, 2vw) #000c;
 }
 
 #game-board .game-board-column {
