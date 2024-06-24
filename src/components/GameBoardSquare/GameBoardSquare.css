@@ -1,6 +1,6 @@
 .game-board-cell {
-    height: min(10vh, 10vw);
-    width: min(10vh, 10vw);
+    height: var(--game-square-size);
+    width: var(--game-square-size);
 
     display: flex;
     flex-direction: column;
@@ -8,8 +8,8 @@
     align-items: center;
 
     background-color: green;
-    border: min(0.2vh, 0.2vw) solid darkgreen;
-    border-radius: min(1vh, 1vw);
+    border: var(--game-square-border-size) solid darkgreen;
+    border-radius: var(--game-square-radius-size);
 }
 
 #game-board .playable {
