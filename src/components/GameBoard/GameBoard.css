@@ -1,0 +1,15 @@
+#game-board {
+    display: flex;
+    flex-direction: row;
+    width: min-content;
+    background-color: darkgreen;
+    border: min(0.2vh, 0.2vw) solid black;
+    border-radius: min(1.2vh, 1.2vw);
+    padding: min(0.2vh, 0.2vw);
+    margin-top: 3rem;
+}
+
+#game-board .game-board-column {
+    display: flex;
+    flex-direction: column-reverse;
+}

@@ -1,0 +1,17 @@
+.game-board-cell {
+    height: min(10vh, 10vw);
+    width: min(10vh, 10vw);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: green;
+    border: min(0.2vh, 0.2vw) solid darkgreen;
+    border-radius: min(1vh, 1vw);
+}
+
+#game-board .playable {
+    background-color: #9acd32aa;
+}
