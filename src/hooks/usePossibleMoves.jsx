@@ -31,24 +31,43 @@ export default function usePossibleMoves() {
 
     const getOutFlankedPieces = (xCoordinate, yCoordinate) => {
         const outFlanked = [];
-        outFlanked.push(...getOutFlankedUp(xCoordinate, yCoordinate));
-        outFlanked.push(...getOutFlankedUpRight(xCoordinate, yCoordinate));
-        outFlanked.push(...getOutFlankedRight(xCoordinate, yCoordinate));
-        outFlanked.push(...getOutFlankedDownRight(xCoordinate, yCoordinate));
-        outFlanked.push(...getOutFlankedDown(xCoordinate, yCoordinate));
-        outFlanked.push(...getOutFlankedDownLeft(xCoordinate, yCoordinate));
-        outFlanked.push(...getOutFlankedLeft(xCoordinate, yCoordinate));
-        outFlanked.push(...getOutFlankedUpLeft(xCoordinate, yCoordinate));
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, upFunc)
+        );
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, upRightFunc)
+        );
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, rightFunc)
+        );
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, downRightFunc)
+        );
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, downFunc)
+        );
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, downLeftFunc)
+        );
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, leftFunc)
+        );
+        outFlanked.push(
+            ...getOutFlankedDirection(xCoordinate, yCoordinate, upLeftFunc)
+        );
         if (!outFlanked.length) return null;
         return outFlanked;
     };
 
-    const getOutFlankedUp = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate;
-        let currentY = yCoordinate + 1;
-        let outFlanked = [];
+    const getOutFlankedDirection = (
+        xCoordinate,
+        yCoordinate,
+        directionFunc
+    ) => {
+        const { nextX, nextY } = directionFunc(xCoordinate, yCoordinate);
+        const outFlanked = [];
 
-        const checkNextPosition = () => {
+        const checkNextPosition = (currentX, currentY) => {
             if (!checkIfExists(currentX, currentY)) {
                 return [];
             }
@@ -61,222 +80,63 @@ export default function usePossibleMoves() {
                     xCoordinate: currentX,
                     yCoordinate: currentY,
                 });
-                currentY++;
-                return checkNextPosition();
+                const { nextX, nextY } = directionFunc(currentX, currentY);
+                return checkNextPosition(nextX, nextY);
             }
             if (currentValue.value === isWhiteTurn) {
                 return outFlanked;
             }
         };
 
-        return checkNextPosition();
+        return checkNextPosition(nextX, nextY);
     };
 
-    const getOutFlankedUpRight = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate + 1;
-        let currentY = yCoordinate + 1;
-        let outFlanked = [];
-
-        const checkNextPosition = () => {
-            if (!checkIfExists(currentX, currentY)) {
-                return [];
-            }
-            const currentValue = gameState[currentX][currentY];
-            if (!currentValue) {
-                return [];
-            }
-            if (currentValue.value !== isWhiteTurn) {
-                outFlanked.push({
-                    xCoordinate: currentX,
-                    yCoordinate: currentY,
-                });
-                currentX++;
-                currentY++;
-                return checkNextPosition();
-            }
-            if (currentValue.value === isWhiteTurn) {
-                return outFlanked;
-            }
-        };
-
-        return checkNextPosition();
+    const upFunc = (currentX, currentY) => {
+        const nextY = currentY + 1;
+        const nextX = currentX;
+        return { nextX, nextY };
     };
 
-    const getOutFlankedRight = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate + 1;
-        let currentY = yCoordinate;
-        let outFlanked = [];
-
-        const checkNextPosition = () => {
-            if (!checkIfExists(currentX, currentY)) {
-                return [];
-            }
-            const currentValue = gameState[currentX][currentY];
-            if (!currentValue) {
-                return [];
-            }
-            if (currentValue.value !== isWhiteTurn) {
-                outFlanked.push({
-                    xCoordinate: currentX,
-                    yCoordinate: currentY,
-                });
-                currentX++;
-                return checkNextPosition();
-            }
-            if (currentValue.value === isWhiteTurn) {
-                return outFlanked;
-            }
-        };
-
-        return checkNextPosition();
+    const upRightFunc = (currentX, currentY) => {
+        const nextY = currentY + 1;
+        const nextX = currentX + 1;
+        return { nextX, nextY };
     };
 
-    const getOutFlankedDownRight = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate + 1;
-        let currentY = yCoordinate - 1;
-        let outFlanked = [];
-
-        const checkNextPosition = () => {
-            if (!checkIfExists(currentX, currentY)) {
-                return [];
-            }
-            const currentValue = gameState[currentX][currentY];
-            if (!currentValue) {
-                return [];
-            }
-            if (currentValue.value !== isWhiteTurn) {
-                outFlanked.push({
-                    xCoordinate: currentX,
-                    yCoordinate: currentY,
-                });
-                currentX++;
-                currentY--;
-                return checkNextPosition();
-            }
-            if (currentValue.value === isWhiteTurn) {
-                return outFlanked;
-            }
-        };
-
-        return checkNextPosition();
+    const rightFunc = (currentX, currentY) => {
+        const nextY = currentY;
+        const nextX = currentX + 1;
+        return { nextX, nextY };
     };
 
-    const getOutFlankedDown = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate;
-        let currentY = yCoordinate - 1;
-        let outFlanked = [];
-
-        const checkNextPosition = () => {
-            if (!checkIfExists(currentX, currentY)) {
-                return [];
-            }
-            const currentValue = gameState[currentX][currentY];
-            if (!currentValue) {
-                return [];
-            }
-            if (currentValue.value !== isWhiteTurn) {
-                outFlanked.push({
-                    xCoordinate: currentX,
-                    yCoordinate: currentY,
-                });
-                currentY--;
-                return checkNextPosition();
-            }
-            if (currentValue.value === isWhiteTurn) {
-                return outFlanked;
-            }
-        };
-
-        return checkNextPosition();
+    const downRightFunc = (currentX, currentY) => {
+        const nextY = currentY - 1;
+        const nextX = currentX + 1;
+        return { nextX, nextY };
     };
 
-    const getOutFlankedDownLeft = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate - 1;
-        let currentY = yCoordinate - 1;
-        let outFlanked = [];
-
-        const checkNextPosition = () => {
-            if (!checkIfExists(currentX, currentY)) {
-                return [];
-            }
-            const currentValue = gameState[currentX][currentY];
-            if (!currentValue) {
-                return [];
-            }
-            if (currentValue.value !== isWhiteTurn) {
-                outFlanked.push({
-                    xCoordinate: currentX,
-                    yCoordinate: currentY,
-                });
-                currentX--;
-                currentY--;
-                return checkNextPosition();
-            }
-            if (currentValue.value === isWhiteTurn) {
-                return outFlanked;
-            }
-        };
-
-        return checkNextPosition();
+    const downFunc = (currentX, currentY) => {
+        const nextY = currentY - 1;
+        const nextX = currentX;
+        return { nextX, nextY };
     };
 
-    const getOutFlankedLeft = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate - 1;
-        let currentY = yCoordinate;
-        let outFlanked = [];
-
-        const checkNextPosition = () => {
-            if (!checkIfExists(currentX, currentY)) {
-                return [];
-            }
-            const currentValue = gameState[currentX][currentY];
-            if (!currentValue) {
-                return [];
-            }
-            if (currentValue.value !== isWhiteTurn) {
-                outFlanked.push({
-                    xCoordinate: currentX,
-                    yCoordinate: currentY,
-                });
-                currentX--;
-                return checkNextPosition();
-            }
-            if (currentValue.value === isWhiteTurn) {
-                return outFlanked;
-            }
-        };
-
-        return checkNextPosition();
+    const downLeftFunc = (currentX, currentY) => {
+        const nextY = currentY - 1;
+        const nextX = currentX - 1;
+        return { nextX, nextY };
     };
 
-    const getOutFlankedUpLeft = (xCoordinate, yCoordinate) => {
-        let currentX = xCoordinate - 1;
-        let currentY = yCoordinate + 1;
-        let outFlanked = [];
+    const leftFunc = (currentX, currentY) => {
+        const nextY = currentY;
+        const nextX = currentX - 1;
+        return { nextX, nextY };
+    };
 
-        const checkNextPosition = () => {
-            if (!checkIfExists(currentX, currentY)) {
-                return [];
-            }
-            const currentValue = gameState[currentX][currentY];
-            if (!currentValue) {
-                return [];
-            }
-            if (currentValue.value !== isWhiteTurn) {
-                outFlanked.push({
-                    xCoordinate: currentX,
-                    yCoordinate: currentY,
-                });
-                currentX--;
-                currentY++;
-                return checkNextPosition();
-            }
-            if (currentValue.value === isWhiteTurn) {
-                return outFlanked;
-            }
-        };
-
-        return checkNextPosition();
+    const upLeftFunc = (currentX, currentY) => {
+        const nextY = currentY + 1;
+        const nextX = currentX - 1;
+        return { nextX, nextY };
     };
 
     const checkIfExists = (xCoordinate, yCoordinate) => {
