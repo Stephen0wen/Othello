@@ -1,0 +1,11 @@
+#turn-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(var(--game-square-size) * 4.5);
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #00640099;
+}
