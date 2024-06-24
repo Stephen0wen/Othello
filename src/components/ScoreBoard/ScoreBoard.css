@@ -1,0 +1,17 @@
+#score-board {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: calc(var(--game-square-size) * 5);
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #00640099;
+}
+
+#score-board .score-counter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: calc(var(--game-square-size) * 2);
+}
