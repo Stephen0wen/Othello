@@ -5,6 +5,7 @@ import { GameContext } from "../../contexts/GameContext";
 
 import GameBoardSquare from "../GameBoardSquare/GameBoardSquare";
 import useGreedyAiTurn from "../../hooks/useGreedyAiTurn";
+import GameEndBanner from "../GameEndBanner/GameEndBanner";
 
 export default function GameBoard() {
     const { gameState } = useContext(GameContext);
@@ -29,6 +30,7 @@ export default function GameBoard() {
                     </div>
                 );
             })}
+            <GameEndBanner />
         </div>
     );
 }
