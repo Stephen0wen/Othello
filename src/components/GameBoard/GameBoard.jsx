@@ -5,13 +5,16 @@ import { GameContext } from "../../contexts/GameContext";
 
 import GameBoardSquare from "../GameBoardSquare/GameBoardSquare";
 import useGreedyAiTurn from "../../hooks/useGreedyAiTurn";
+import GameEndBanner from "../GameEndBanner/GameEndBanner";
+import useNewGame from "../../hooks/useNewGame";
 
 export default function GameBoard() {
     const { gameState } = useContext(GameContext);
+    const newGame = useNewGame();
     useGreedyAiTurn();
 
     return (
-        <div id="game-board">
+        <div id="game-board" onClick={newGame}>
             {gameState.map((column, xCoordinate) => {
                 return (
                     <div key={xCoordinate} className="game-board-column">
@@ -29,6 +32,7 @@ export default function GameBoard() {
                     </div>
                 );
             })}
+            <GameEndBanner />
         </div>
     );
 }

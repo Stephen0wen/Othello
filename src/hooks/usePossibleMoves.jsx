@@ -4,8 +4,13 @@ import { GameContext } from "../contexts/GameContext";
 
 export default function usePossibleMoves() {
     const [possibleMoves, setPossibleMoves] = useState(example);
-    const { gameState, isWhiteTurn, setIsWhiteTurn, setIsGameOver } =
-        useContext(GameContext);
+    const {
+        gameState,
+        isWhiteTurn,
+        setIsWhiteTurn,
+        isGameOver,
+        setIsGameOver,
+    } = useContext(GameContext);
 
     let checkingColor;
 
@@ -25,7 +30,7 @@ export default function usePossibleMoves() {
                 setIsGameOver(true);
             }
         }
-    }, [isWhiteTurn]);
+    }, [isWhiteTurn, isGameOver]);
 
     const checkPossibleMoves = () => {
         const newPossibleMoves = {};
