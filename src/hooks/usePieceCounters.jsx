@@ -4,7 +4,6 @@ import { GameContext } from "../contexts/GameContext";
 export default function usePieceCounters() {
     const [whiteCount, setWhiteCount] = useState(2);
     const [blackCount, setBlackCount] = useState(2);
-
     const { gameState } = useContext(GameContext);
 
     useEffect(() => {

@@ -9,8 +9,9 @@ export default function GameBoardSquare({
     xCoordinate,
     yCoordinate,
 }) {
-    const { isWhiteTurn, isWhiteHuman } = useContext(GameContext);
-    const possibleMoves = usePossibleMoves();
+    const { gameState, isWhiteTurn, isWhiteHuman, isPassing } =
+        useContext(GameContext);
+    const { possibleMoves } = usePossibleMoves();
     const placePiece = usePlacePiece();
     const [className, setClassName] = useState("");
 
@@ -22,8 +23,11 @@ export default function GameBoardSquare({
         if (isWhiteTurn === isWhiteHuman) {
             newClassName = isPlayable ? " playable" : "";
         }
+        if (isPassing && !gameState[xCoordinate][yCoordinate]) {
+            newClassName = " passing";
+        }
         setClassName(newClassName);
-    }, [possibleMoves, isWhiteTurn]);
+    }, [possibleMoves, isPassing]);
 
     const handleClick = () => {
         placePiece(xCoordinate, yCoordinate);

@@ -10,8 +10,15 @@
     background-color: green;
     border: var(--game-square-border-size) solid darkgreen;
     border-radius: var(--game-square-radius-size);
+    transition: 100ms;
 }
 
 #game-board .playable {
     background-color: #9acd32aa;
+    transition: 100ms;
+}
+
+#game-board .passing {
+    border: var(--game-square-border-size) solid darkred;
+    background-color: darkred;
 }

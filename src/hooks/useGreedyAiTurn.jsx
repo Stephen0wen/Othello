@@ -6,7 +6,7 @@ import usePossibleMoves from "./usePossibleMoves";
 
 export default function useGreedyAiTurn() {
     const { isWhiteTurn, isWhiteHuman } = useContext(GameContext);
-    const possibleMoves = usePossibleMoves();
+    const { possibleMoves } = usePossibleMoves();
     const placePiece = usePlacePiece();
 
     useEffect(() => {
