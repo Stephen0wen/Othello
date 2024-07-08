@@ -3,7 +3,7 @@ import { GameContext } from "../contexts/GameContext";
 import usePossibleMoves from "./usePossibleMoves";
 
 export default function usePlacePiece() {
-    const possibleMoves = usePossibleMoves();
+    const { possibleMoves } = usePossibleMoves();
     const { gameState, setGameState, isWhiteTurn, setIsWhiteTurn } =
         useContext(GameContext);
 

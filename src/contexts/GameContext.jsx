@@ -8,6 +8,7 @@ export const GameProvider = ({ children }) => {
     const [isWhiteTurn, setIsWhiteTurn] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [isWhiteHuman, setIsWhiteHuman] = useState(false);
+    const [isPassing, setIsPassing] = useState(false);
 
     return (
         <GameContext.Provider
@@ -20,6 +21,8 @@ export const GameProvider = ({ children }) => {
                 setIsWhiteHuman,
                 isGameOver,
                 setIsGameOver,
+                isPassing,
+                setIsPassing,
             }}
         >
             {children}

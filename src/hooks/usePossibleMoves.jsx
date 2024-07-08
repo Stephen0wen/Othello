@@ -10,11 +10,13 @@ export default function usePossibleMoves() {
         setIsWhiteTurn,
         isGameOver,
         setIsGameOver,
+        setIsPassing,
     } = useContext(GameContext);
 
     let checkingColor;
 
     useEffect(() => {
+        setIsPassing(false);
         checkingColor = isWhiteTurn;
         let newPossibleMoves;
         newPossibleMoves = checkPossibleMoves();
@@ -25,8 +27,12 @@ export default function usePossibleMoves() {
             newPossibleMoves = checkPossibleMoves();
             setPossibleMoves(newPossibleMoves);
             if (Object.keys(newPossibleMoves).length) {
-                setIsWhiteTurn(!isWhiteTurn);
+                setIsPassing(true);
+                setTimeout(() => {
+                    setIsWhiteTurn(!isWhiteTurn);
+                }, 500);
             } else {
+                setIsPassing(false);
                 setIsGameOver(true);
             }
         }
@@ -175,5 +181,5 @@ export default function usePossibleMoves() {
         return true;
     };
 
-    return possibleMoves;
+    return { possibleMoves };
 }

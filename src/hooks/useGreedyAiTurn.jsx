@@ -5,14 +5,14 @@ import usePlacePiece from "./usePlacePiece";
 import usePossibleMoves from "./usePossibleMoves";
 
 export default function useGreedyAiTurn() {
-    const { isWhiteTurn, isWhiteHuman } = useContext(GameContext);
-    const possibleMoves = usePossibleMoves();
+    const { isWhiteTurn, isWhiteHuman, isPassing } = useContext(GameContext);
+    const { possibleMoves } = usePossibleMoves();
     const placePiece = usePlacePiece();
 
     useEffect(() => {
-        if (isWhiteTurn === isWhiteHuman) {
-            return;
-        }
+        if (isWhiteTurn === isWhiteHuman) return;
+        if (isPassing) return;
+
         setTimeout(() => {
             let bestScore = 0;
             let bestX;
